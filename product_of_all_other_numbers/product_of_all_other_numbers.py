@@ -3,6 +3,8 @@ Input: a List of integers
 Returns: a List of integers
 '''
 def product_of_all_other_numbers(arr):
+    '''
+    # FIRST PASS
     products = []
     for i in arr:
         result = 1
@@ -12,6 +14,29 @@ def product_of_all_other_numbers(arr):
             result = result * j
         products.append(result)
     return products
+
+    # SECOND PASS
+    product = 1
+    for i in arr:
+        product *= i
+    return [int(product/i) for i in arr]
+    '''
+
+    products = [0] * len(arr)
+    prod = 1
+    # loop through all values of array
+    for i in range(len(arr)):
+        # product of all items before
+        products[i] = prod
+        prod *= arr[i]
+
+    prod = 1
+    for i in range(len(arr)-1, -1, -1):
+        products[i] *= prod
+        prod *= arr[i]
+    
+    return products
+
 
 if __name__ == '__main__':
     # Use the main function to test your implementation
